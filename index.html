@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Terra em Movimento — projeto de Ciências sobre rotação e translação da Terra.">
+<title>🌍 Terra em Movimento</title>
+<style>
+:root{--bg:#030617;--card:#0c1530e8;--card2:#111d3fe8;--text:#f5f8ff;--muted:#aebbd7;--cyan:#63dcff;--purple:#a88cff;--green:#68e6a5;--line:#ffffff1b}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0,#174a6d44,transparent 30%),radial-gradient(circle at 90% 15%,#633e9140,transparent 30%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.3;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:55px 55px}
+nav{position:sticky;top:0;z-index:30;background:#030617d9;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1150px;margin:auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}.logo{font-weight:900;font-size:1.05rem}.logo b{color:var(--cyan)}
+.links{display:flex;gap:5px;flex-wrap:wrap}.links a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:10px;font-size:.88rem}.links a:hover{background:#ffffff12;color:#fff}
+main{max-width:1150px;margin:auto;padding:0 20px 60px}
+.hero{min-height:680px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px}.tag{display:inline-block;color:var(--cyan);border:1px solid #63dcff44;background:#63dcff0d;padding:7px 12px;border-radius:999px;font-weight:800;font-size:.85rem}
+h1{font-size:clamp(3rem,7vw,6rem);line-height:.94;letter-spacing:-4px;margin:20px 0}.gradient{background:linear-gradient(90deg,#fff,#63dcff,#a88cff);color:transparent;background-clip:text;-webkit-background-clip:text}
+.lead{color:var(--muted);font-size:1.15rem;max-width:650px}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{border:0;background:var(--cyan);color:#03101b;padding:12px 17px;border-radius:12px;font-weight:900;text-decoration:none;cursor:pointer}.btn.secondary{background:transparent;color:#fff;border:1px solid var(--line)}
+section{padding:65px 0}.eyebrow{color:var(--cyan);font-weight:900;text-transform:uppercase;letter-spacing:2px;font-size:.75rem}h2{font-size:clamp(2rem,4vw,3.2rem);margin:8px 0}.intro{color:var(--muted);max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.grid3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 20px 60px #0003}.card h3{font-size:1.35rem;margin:8px 0}.card p,.card li{color:var(--muted)}.icon{font-size:2.2rem}.number{font-size:2.7rem;font-weight:900;color:var(--cyan)}
+.compare{width:100%;border-collapse:collapse;background:var(--card);border-radius:18px;overflow:hidden}.compare th,.compare td{padding:15px;text-align:left;border-bottom:1px solid var(--line)}.compare th{color:var(--cyan);background:#ffffff08}
+.timeline{display:grid;gap:14px}.step{display:grid;grid-template-columns:55px 1fr;gap:14px}.num{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#63dcff12;border:1px solid #63dcff33;color:var(--cyan);font-weight:900}
+.quiz{max-width:850px;margin:auto}.question{margin-bottom:25px}.option{display:block;padding:12px 14px;margin:8px 0;border:1px solid var(--line);border-radius:12px;background:#ffffff06;cursor:pointer}.option:hover{border-color:#63dcff77}.result{display:none;margin-top:18px;padding:17px;border-radius:14px;background:#68e6a512;border:1px solid #68e6a544}
+footer{text-align:center;border-top:1px solid var(--line);padding:35px 20px;color:var(--muted)}
+.login{position:fixed;z-index:100;inset:0;display:grid;place-items:center;background:#02040df5;padding:20px}.loginbox{width:min(450px,100%);padding:35px;text-align:center;background:var(--card2);border:1px solid var(--line);border-radius:25px}.loginbox input{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:#050a1d;color:white;font-size:1rem;margin:12px 0}.hidden{display:none!important}
+.scene{height:470px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:radial-gradient(circle,#113b5c33,transparent 40%),#020511;box-shadow:inset 0 0 80px #000}
+.scene:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#9beaff 1px,transparent 1px);background-size:70px 70px,110px 110px;background-position:20px 15px,55px 65px;opacity:.35}
+.sun{position:absolute;left:50%;top:50%;width:105px;height:105px;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff8b0,#ffd13f 48%,#ff7338);box-shadow:0 0 35px #ffc44d,0 0 90px #ff9d383d;z-index:3;font-size:3rem}
+.orbit{position:absolute;left:50%;top:50%;width:390px;height:250px;transform:translate(-50%,-50%) rotate(-12deg);border:2px solid #63dcff55;border-radius:50%}
+.moving{position:absolute;left:50%;top:50%;width:390px;height:250px;transform:translate(-50%,-50%) rotate(-12deg);animation:orbit 8s linear infinite;z-index:4}
+.earth{position:absolute;left:0;top:50%;width:72px;height:72px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 30% 25%,#7beeff,#268eea 55%,#1046a5);box-shadow:0 0 25px #63dcffaa;animation:spin 2s linear infinite;overflow:visible}
+.earth:before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(ellipse at 28% 30%,#49c977 0 15%,transparent 16%),radial-gradient(ellipse at 68% 62%,#48bd70 0 17%,transparent 18%),radial-gradient(ellipse at 62% 25%,#73d982 0 10%,transparent 11%);opacity:.95}
+.earth:after{content:"";position:absolute;left:50%;top:-10px;height:92px;width:2px;background:#ffffffaa;transform:rotate(23.5deg)}
+.caption{position:absolute;bottom:15px;left:20px;right:20px;text-align:center;color:#9eb0d0;font-size:.82rem;z-index:6}.label{position:absolute;z-index:7;background:#030817dd;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.7rem;font-weight:900;letter-spacing:1px}.sol{left:50%;top:calc(50% + 65px);transform:translateX(-50%)}.terra{left:calc(50% + 165px);top:calc(50% - 135px)}
+@keyframes orbit{from{transform:translate(-50%,-50%) rotate(-12deg) rotate(0)}to{transform:translate(-50%,-50%) rotate(-12deg) rotate(360deg)}}@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:40px}.grid,.grid3{grid-template-columns:1fr}.links{display:none}.scene{height:390px}.orbit,.moving{width:290px;height:185px}.terra{left:calc(50% + 125px);top:calc(50% - 105px)}h1{letter-spacing:-2px}}
+</style>
+</head>
+<body>
+<div class="login" id="login">
+ <div class="loginbox"><div style="font-size:3.2rem">🌍</div><h2>Terra em Movimento</h2><p style="color:var(--muted)">Digite seu nome para entrar no projeto.</p><input id="nome" placeholder="Seu nome"><button class="btn" onclick="entrar()">Entrar e explorar 🚀</button></div>
+</div>
+
+<nav><div class="nav"><div class="logo">🌍 Terra <b>em Movimento</b></div><div class="links"><a href="#rotacao">Rotação</a><a href="#translacao">Translação</a><a href="#estacoes">Estações</a><a href="#comparacao">Comparação</a><a href="#quiz">Quiz</a></div></div></nav>
+
+<main>
+<section class="hero">
+ <div><span class="tag">🔬 Projeto de Ciências • Sistema Solar</span><h1>A Terra está sempre <span class="gradient">em movimento.</span></h1><p class="lead">A Terra realiza diferentes movimentos. Dois deles são fundamentais para entendermos fenômenos do nosso cotidiano: <strong>rotação</strong> e <strong>translação</strong>.</p><div class="buttons"><a class="btn" href="#rotacao">Começar a aprender ↓</a><a class="btn secondary" href="#quiz">Fazer o quiz 🧠</a></div><p id="welcome" style="color:var(--cyan);font-weight:700"></p></div>
+ <div class="scene"><div class="sun">☀️</div><div class="orbit"></div><div class="moving"><div class="earth"></div></div><div class="label sol">SOL</div><div class="label terra">TERRA</div><div class="caption">A animação é uma representação educativa: a Terra gira em seu eixo e percorre uma órbita ao redor do Sol.</div></div>
+</section>
+
+<section id="rotacao"><div class="eyebrow">Movimento 01</div><h2>🔄 Rotação</h2><p class="intro">Rotação é o movimento que a Terra realiza ao girar em torno do seu próprio eixo imaginário.</p>
+<div class="grid"><div class="card"><div class="icon">🌎</div><h3>Como funciona?</h3><p>A Terra gira de <strong>oeste para leste</strong>. Uma rotação completa dura aproximadamente <strong>24 horas</strong>.</p><p>Esse movimento faz com que diferentes regiões do planeta alternem entre a parte iluminada pelo Sol e a parte sem iluminação direta.</p></div><div class="card"><div class="number">≈ 24 h</div><h3>O resultado</h3><p>A rotação está diretamente relacionada à alternância entre <strong>dia e noite</strong>.</p></div></div></section>
+
+<section id="translacao"><div class="eyebrow">Movimento 02</div><h2>☀️ Translação</h2><p class="intro">Translação é o movimento que a Terra realiza ao redor do Sol, percorrendo sua órbita.</p>
+<div class="grid"><div class="card"><div class="icon">☀️</div><h3>Como funciona?</h3><p>Uma volta completa ao redor do Sol dura aproximadamente <strong>365 dias e 6 horas</strong>, ou cerca de 365,25 dias.</p><p>Esse período está relacionado à duração do nosso ano e às horas extras ajudam a explicar a existência dos anos bissextos.</p></div><div class="card"><div class="number">≈ 365,25</div><h3>Dias em uma volta</h3><p>É uma aproximação do tempo que a Terra leva para completar sua órbita ao redor do Sol.</p></div></div></section>
+
+<section id="dia"><div class="eyebrow">Rotação na prática</div><h2>🌗 Como surgem o dia e a noite?</h2><div class="grid3 grid"><div class="card"><div class="icon">☀️</div><h3>Dia</h3><p>A região da Terra voltada para o Sol recebe luz solar direta.</p></div><div class="card"><div class="icon">🌙</div><h3>Noite</h3><p>A região que está voltada para o lado oposto ao Sol não recebe luz solar direta.</p></div><div class="card"><div class="icon">🔄</div><h3>Movimento</h3><p>Como a Terra continua girando, os lugares passam de uma região para a outra.</p></div></div></section>
+
+<section id="estacoes"><div class="eyebrow">Translação + inclinação</div><h2>🍂 As estações do ano</h2><p class="intro">As estações do ano estão relacionadas à translação da Terra e à inclinação do seu eixo de rotação.</p>
+<div class="grid"><div class="card"><div class="icon">📐</div><h3>Inclinação do eixo</h3><p>O eixo da Terra é inclinado aproximadamente <strong>23,5°</strong>. Essa inclinação é importante para a variação da iluminação recebida pelos hemisférios.</p></div><div class="card"><div class="icon">🌱☀️🍁❄️</div><h3>O que muda?</h3><p>Durante a órbita, os hemisférios recebem a luz solar com diferentes ângulos e por diferentes períodos do dia. Isso contribui para as estações.</p></div></div>
+<div class="card" style="margin-top:18px"><div class="timeline"><div class="step"><div class="num">1</div><div><strong>A Terra está inclinada</strong><p>Seu eixo não é perpendicular ao plano de sua órbita.</p></div></div><div class="step"><div class="num">2</div><div><strong>A Terra faz a translação</strong><p>Ela percorre sua órbita ao redor do Sol.</p></div></div><div class="step"><div class="num">3</div><div><strong>A iluminação varia</strong><p>Os hemisférios passam por períodos diferentes de maior ou menor incidência solar.</p></div></div></div></div></section>
+
+<section id="comparacao"><div class="eyebrow">Resumo</div><h2>📊 Rotação × Translação</h2><table class="compare"><tr><th>Característica</th><th>Rotação</th><th>Translação</th></tr><tr><td>O que acontece?</td><td>Terra gira em torno do próprio eixo</td><td>Terra percorre sua órbita ao redor do Sol</td></tr><tr><td>Duração aproximada</td><td>24 horas</td><td>365 dias e 6 horas</td></tr><tr><td>Relacionado a</td><td>Dia e noite</td><td>Ano e, junto da inclinação do eixo, estações</td></tr><tr><td>Movimento</td><td>Giro do planeta</td><td>Órbita ao redor do Sol</td></tr></table></section>
+
+<section id="curiosidades"><div class="eyebrow">Você sabia?</div><h2>💡 Curiosidades</h2><div class="grid3 grid"><div class="card"><div class="number">23,5°</div><p>Aproximadamente a inclinação do eixo terrestre usada na explicação das estações.</p></div><div class="card"><div class="number">365,25</div><p>Dias, aproximadamente, no período orbital da Terra.</p></div><div class="card"><div class="number">24 h</div><p>Tempo aproximado de uma rotação no nosso cotidiano.</p></div></div></section>
+
+<section id="quiz"><div class="eyebrow">Desafio final</div><h2>🧠 Quiz</h2><p class="intro">Responda às cinco perguntas e descubra sua pontuação.</p><div class="card quiz">
+<div class="question"><h3>1. O que é rotação?</h3><label class="option"><input type="radio" name="q1" value="0"> Movimento da Terra ao redor do Sol</label><label class="option"><input type="radio" name="q1" value="1"> Giro da Terra em torno do próprio eixo</label><label class="option"><input type="radio" name="q1" value="0"> Movimento da Lua ao redor da Terra</label></div>
+<div class="question"><h3>2. Aproximadamente quanto dura uma translação?</h3><label class="option"><input type="radio" name="q2" value="0"> 24 horas</label><label class="option"><input type="radio" name="q2" value="1"> 365 dias e cerca de 6 horas</label><label class="option"><input type="radio" name="q2" value="0"> 30 dias</label></div>
+<div class="question"><h3>3. Qual movimento está diretamente relacionado à alternância entre dia e noite?</h3><label class="option"><input type="radio" name="q3" value="1"> Rotação</label><label class="option"><input type="radio" name="q3" value="0"> Translação</label><label class="option"><input type="radio" name="q3" value="0"> Movimento das marés</label></div>
+<div class="question"><h3>4. O que, junto da translação, é fundamental para explicar as estações?</h3><label class="option"><input type="radio" name="q4" value="1"> A inclinação do eixo terrestre</label><label class="option"><input type="radio" name="q4" value="0"> A distância entre Terra e Lua</label><label class="option"><input type="radio" name="q4" value="0"> O Sol girar ao redor da Terra</label></div>
+<div class="question"><h3>5. Ao redor de qual corpo a Terra realiza sua translação?</h3><label class="option"><input type="radio" name="q5" value="1"> Sol</label><label class="option"><input type="radio" name="q5" value="0"> Lua</label><label class="option"><input type="radio" name="q5" value="0"> Marte</label></div>
+<button class="btn" onclick="corrigir()">Ver resultado 🏆</button><div class="result" id="result"></div></div></section>
+</main>
+<footer><strong>🌍 Terra em Movimento</strong><br>Projeto educativo de Ciências • Rotação e Translação da Terra</footer>
+
+<script>
+function entrar(){const n=document.getElementById('nome').value.trim();if(!n){alert('Digite seu nome para continuar.');return}document.getElementById('login').classList.add('hidden');document.getElementById('welcome').textContent='Olá, '+n+'! Explore o conteúdo e faça o quiz no final. 🚀'}
+document.getElementById('nome').addEventListener('keydown',e=>{if(e.key==='Enter')entrar()});
+function corrigir(){let p=0;for(let i=1;i<=5;i++){let x=document.querySelector('input[name=q'+i+']:checked');if(x)p+=+x.value}let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>Você fez '+p+' de 5 pontos.</strong><br>'+(p===5?'🌟 Excelente! Você dominou o assunto!':p>=3?'👏 Muito bem! Você entendeu os principais conceitos.':'📚 Revise o conteúdo e tente novamente!');r.scrollIntoView({behavior:'smooth',block:'center'})}
+</script>
+</body>
+</html>
